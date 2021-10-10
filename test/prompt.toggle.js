@@ -32,6 +32,33 @@ describe('toggle', function() {
           assert.equal(answer, true);
         });
     });
+
+    it('toggle should call options.initial when a function', () => {
+      prompt = new Prompt({
+        message: 'foo',
+        initial: () => false
+      });
+
+      prompt.once('run', () => prompt.submit());
+      return prompt.run()
+        .then(answer => {
+          assert.equal(answer, false);
+        });
+    });
+
+    it('toggle should use result when it is a function', () => {
+      prompt = new Prompt({
+        message: 'foo',
+        initial: false,
+        result: () => true
+      });
+
+      prompt.once('run', () => prompt.submit());
+      return prompt.run()
+        .then(answer => {
+          assert.equal(answer, true);
+        });
+    });
   });
 
   describe('key handling', () => {

@@ -32,13 +32,13 @@ describe('boolean prompt', function() {
     it('should call options.initial when a function', () => {
       prompt = new Prompt({
         message: 'foo',
-        initial: () => true
+        initial: () => false
       });
 
       prompt.once('run', () => prompt.submit());
       return prompt.run()
         .then(answer => {
-          assert.equal(answer, true);
+          assert.equal(answer, false);
         });
     });
 
